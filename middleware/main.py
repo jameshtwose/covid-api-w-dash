@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from functools import lru_cache
 from fastapi import FastAPI
+import uvicorn
 
 app = FastAPI()
 
@@ -49,3 +50,7 @@ def get_location_time_seris(location_id: str):
     df = get_data()
     df_location = df.loc[df["location"] == location_id, :]
     return df_location.to_dict()
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
